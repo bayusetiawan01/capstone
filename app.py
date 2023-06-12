@@ -19,9 +19,11 @@ final_data = pd.read_csv("Final Data.csv")
 final_data2 = final_data.sort_values(
     by=["meat_total"], ignore_index=True, ascending=False
 )
+final_data2.rename(columns = {'meat_total':'Konsumsi Daging Merah', 'country_name':'Negara'}, inplace=True)
 final_data3 = final_data.sort_values(
     by=["hospital_bed"], ignore_index=True, ascending=False
 )
+final_data3.rename(columns = {'hospital_bed':'Ketersediaan Fasilitas Kesehatan', 'country_name':'Negara'}, inplace=True)
 
 # Data Process End
 st.title("Analisis Pengaruh Konsumsi Daging Merah Terhadap Peningkatan Risiko Penyakit")
@@ -69,11 +71,16 @@ if tabs == "Raw Data":
 
 elif tabs == "Dashboard":
     st.header("Pendahuluan")
+    col1, col2 = st.columns([4, 2])
+    with st.container():
+        with col1:
+            st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun akhir akhir ini banyak media memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
+        with col2:
+            st.image('https://www.freeiconspng.com/uploads/meat-png-0.png')
     st.markdown("""---""")
 
     st.header("Analisis Data")
     col1, col2 = st.columns([3, 1])
-    data = np.random.randn(10, 1)
     with st.container():
         with col1:
             fig = px.scatter(
@@ -85,9 +92,11 @@ elif tabs == "Dashboard":
             fig.update_layout(
                 xaxis_title="Mortalitas",
                 yaxis_title="Konsumsi Daging",
+                uniformtext_mode='hide',
             )
             fig.update_traces(
-                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} <br>Konsumsi Daging: %{y}"
+                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} <br>Konsumsi Daging: %{y}",
+                marker_size=8,
             )
             st.write(fig)
         with col2:
@@ -98,9 +107,9 @@ elif tabs == "Dashboard":
     col1, col2 = st.columns([1, 1])
     with st.container():
         with col1:
-            st.table(final_data2[["country_name", "meat_total"]].head(10))
+            st.table(final_data2[["Negara", "Konsumsi Daging Merah"]].head(10))
         with col2:
-            st.table(final_data2[["country_name", "meat_total"]].tail(10))
+            st.table(final_data2[["Negara", "Konsumsi Daging Merah"]].tail(10))
     st.markdown("""---""")
 
     st.header("Penjelasan Data")
@@ -120,6 +129,7 @@ elif tabs == "Dashboard":
             )
             fig.update_traces(
                 hovertemplate="Negara: %{text} <br>Mortalitas: %{x} <br>Fasilitas Kesehatan: %{y}",
+                marker_size=8,
             )
             st.write(fig)
         with col2:
@@ -130,9 +140,9 @@ elif tabs == "Dashboard":
     col1, col2 = st.columns([1, 1])
     with st.container():
         with col1:
-            st.table(final_data3[["country_name", "hospital_bed"]].head(10))
+            st.table(final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]].head(10))
         with col2:
-            st.table(final_data3[["country_name", "hospital_bed"]].tail(10))
+            st.table(final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]].tail(10))
     st.markdown("""---""")
 
     st.header("Kesimpulan dan Solusi")
@@ -146,7 +156,7 @@ elif tabs == "Processed Data":
     st.header("Dataset yang telah diproses")
     st.dataframe(final_data)
     st.write(
-        "Dataset dibersihkan dengan mengjilangkan bagian yang tidak terpakai terlebih dahulu. Karena tahun diaman ketersediaan data cukup lengkap adalah pada tahun 2017 maka data yang diambil hanya data pada tahun 2017."
+        "Dataset dibersihkan dengan mengjilangkan bagian yang tidak terpakai terlebih dahulu. Tahun 2017 merupakan tahun dimana hampir setiap negara memiliki data yang dibutuhkan dan merupakan tahun yang paling baru, Sehingga digunakanlah data tahun 2017."
         " Kemudian dilakukan join tabel berdasarkan kesesuaian kode negara dan tidak semua negara memiliki data konsumsi daging sehingga menyisakan beberapa negara."
         " Setelah dilakukan join tabel terdapat beberapa negara yang duplikat dan memiliki nilai yang sama sehingga langsung saja digunakan perintah 'DISTINCT' pada query MySQL."
         " Kemudian untuk mengatasi nilai null digunakan data satu tahun sebelumnya kecuali nigeria yang data terakhirnya tahun 2004 dan Filipina yang data tahun terakhirnya 2014"
