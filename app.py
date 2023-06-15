@@ -11,6 +11,13 @@ st.set_page_config(page_title="Capstone Project Bayu Setiawan", layout="wide")
 st.markdown("<style>" + open("./style.css").read() + "</style>", unsafe_allow_html=True)
 st.markdown("""---""")
 # Data Process
+
+def highlight_rows(x):
+    if x['Negara'] == 'Indonesia':
+        return ["color: lightblue"]*2
+    else:
+        return [None, None]
+
 disease = pd.read_csv("Disease Percentage.csv")
 beef_consumption = pd.read_csv("Beef 2017.csv")
 sheep_consumption = pd.read_csv("Sheep 2017.csv")
@@ -20,10 +27,28 @@ final_data2 = final_data.sort_values(
     by=["meat_total"], ignore_index=True, ascending=False
 )
 final_data2.rename(columns = {'meat_total':'Konsumsi Daging Merah', 'country_name':'Negara'}, inplace=True)
+final_data2 = final_data2[["Negara","Konsumsi Daging Merah"]]
+final_data2.index = np.arange(1, len(final_data2) + 1)
+final_data2 = final_data2.iloc[np.r_[0:4, -8:0]]
+final_data2 = final_data2.style.apply(highlight_rows, axis = 1)
+
 final_data3 = final_data.sort_values(
     by=["hospital_bed"], ignore_index=True, ascending=False
 )
 final_data3.rename(columns = {'hospital_bed':'Ketersediaan Fasilitas Kesehatan', 'country_name':'Negara'}, inplace=True)
+final_data3 = final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]]
+final_data3.index = np.arange(1, len(final_data3) + 1)
+final_data3 = final_data3.iloc[np.r_[0:4, -8:0]]
+final_data3 = final_data3.style.apply(highlight_rows, axis = 1)
+
+final_data4 = final_data.sort_values(
+    by=["mortality"], ignore_index=True, ascending=False
+)
+final_data4.rename(columns = {'mortality':'Tingkat Mortalitas', 'country_name':'Negara'}, inplace=True)
+final_data4 = final_data4[["Negara","Tingkat Mortalitas"]]
+final_data4.index = np.arange(1, len(final_data4) + 1)
+final_data4 = final_data4.iloc[np.r_[0:4, -8:0]]
+final_data4 = final_data4.style.apply(highlight_rows, axis = 1)
 
 # Data Process End
 st.title("Analisis Pengaruh Konsumsi Daging Merah Terhadap Peningkatan Risiko Penyakit")
@@ -74,11 +99,22 @@ elif tabs == "Dashboard":
     col1, col2 = st.columns([4, 2])
     with st.container():
         with col1:
-            st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun akhir akhir ini banyak media memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
+            st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun banyak media maupun tulisan di media sosial memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
         with col2:
             st.image('https://www.freeiconspng.com/uploads/meat-png-0.png')
     st.markdown("""---""")
 
+    st.header("Posisi Indonesia")
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with st.container():
+        with col1:
+            st.table(final_data2)
+        with col2:
+            st.table(final_data3)
+        with col3:
+            st.table(final_data4)
+    st.markdown("""---""")
+    
     st.header("Analisis Data")
     col1, col2 = st.columns([3, 1])
     with st.container():
@@ -104,19 +140,11 @@ elif tabs == "Dashboard":
             "2. Hanya terdapat 4 negara dengan konsumsi daging merah diatas batas wajar yaitu Argentina, Australia, Brazil dan Khazakstan."
             "3. Indonesia sendiri malah berada di posisi nomor 2 terbawah dalam konsumsi daging merah dan nomor 4 negara dengan mortality rate tinggi."
     st.markdown("""---""")
-    col1, col2 = st.columns([1, 1])
-    with st.container():
-        with col1:
-            st.table(final_data2[["Negara", "Konsumsi Daging Merah"]].head(10))
-        with col2:
-            st.table(final_data2[["Negara", "Konsumsi Daging Merah"]].tail(10))
-    st.markdown("""---""")
 
-    st.header("Penjelasan Data")
-    col1, col2 = st.columns([3, 1])
+    col1, col2 = st.columns([1, 3])
     data = np.random.randn(10, 1)
     with st.container():
-        with col1:
+        with col2:
             fig = px.scatter(
                 x=final_data["mortality"],
                 y=final_data["hospital_bed"],
@@ -132,22 +160,15 @@ elif tabs == "Dashboard":
                 marker_size=8,
             )
             st.write(fig)
-        with col2:
+        with col1:
             "1. Australia, Argentina dan Brazil dapat mengatasi kenaikan risiko akibat konsumsi daging merah yang banyak dikarenakan jumlah fasilitas Kesehatan yang cukup banyak. Sehingga mortality ratenya masih di atas median."
             "2. Untuk Khazakstan meskipun jumlah fasilitas Kesehatan banyak namun tingkat mortalitasnya cukup tinggi hal ini dimungkinkan terdapat faktor yang belum teridentifikasi."
             "3. Indonesia sendiri jumlah fasilitas kesehatannya sedikit jika dibandingan jumlah penduduk Indonesia yang banyak."
     st.markdown("""---""")
-    col1, col2 = st.columns([1, 1])
-    with st.container():
-        with col1:
-            st.table(final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]].head(10))
-        with col2:
-            st.table(final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]].tail(10))
-    st.markdown("""---""")
 
     st.header("Kesimpulan dan Solusi")
-    "1. Berdasarkan data konsumsi daging merah yang semakin tinggi justru mengurangi resiko kanker dikarenakan konsumsinya tidak melebihi batas wajar. Ini dikarenakan daging merah kaya protein dan vitamin yang baik untuk menjaga kesehatan tubuh."
-    "2. Menurut pedoman dari Kushi et al., jumlah daging merah yang direkomendasikan untuk orang sehat adalah 500 g/minggu atau 70 g/hari."
+    "1. Berdasarkan data konsumsi daging merah yang semakin tinggi justru mengurangi resiko kanker selama konsumsinya tidak melebihi batas wajar. Ini dikarenakan daging merah kaya protein dan vitamin yang baik untuk menjaga kesehatan tubuh."
+    "2. Memang benar menurut penelitian daging merah dapat meningkatkan risiko kanker, namun hal itu terjadi jika terlalu banyak dikonsumsi. Menurut pedoman dari Kushi et al., jumlah daging merah yang direkomendasikan untuk orang sehat adalah 500 g/minggu atau 70 g/hari."
     "3. Posisi Indonesia sendiri berada di posisi dua dengan konsumsi daging merah paling sedikit yaitu hanya 1.04 Kg per kapita per tahun dan berada di posisi nomor 4 tingkat mortalitas tertinggi dari data."
     "4. Pemberitaan mengenai peningkatan resiko kanker dan cvd akibat konsumsi daging merah kurang tepat. Seharusnya malah sebaliknya yaitu anjuran untuk mengkonsumsi daging merah yang kaya protein untuk memenuhi kebutuhan gizi yang baik namun tetap memberikan anjuran agar tidak melebihi batas konsumsi."
     "5. Pemerintah juga perlu meningkatkan kapasitas fasilitas Kesehatan untuk mengimbangi konsumsi daging untuk menghindari hal hal yang tidak diinginkan mengingat Indonesia berada di nomor 8 terbawah mengenai ketersediaan fasilitas Kesehatan."
