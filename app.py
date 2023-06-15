@@ -112,12 +112,13 @@ elif tabs == "Dashboard":
     with st.container():
         with col1:
             st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun banyak media maupun tulisan di media sosial memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
+            st.subheader("Hipotesis")
             st.write(" Berdasarkan informasi yang telah diperoleh, untuk sementara kita ambil hipotesis bahwa semakin banyak daging merah yang dikonsumsi maka semakin tinggi risiko kanker yang akan dialami oleh setiap individu.")        
         with col2:
             st.image('https://www.freeiconspng.com/uploads/meat-png-0.png')
     st.markdown("""---""")
 
-    st.header("Bagaimana Posisi Indonesia pada Data yang Tersedia?")
+    st.header("Data yang digunakan")
     col1, col2, col3 = st.columns([1, 1, 1])
     with st.container():
         with col1:
@@ -141,12 +142,12 @@ elif tabs == "Dashboard":
                 height=600,
             )
             fig.update_layout(
-                xaxis_title="Mortalitas",
-                yaxis_title="Konsumsi Daging",
+                xaxis_title="Mortalitas (%)",
+                yaxis_title="Konsumsi Daging (Kg/kapita per tahun)",
                 uniformtext_mode='hide',
             )
             fig.update_traces(
-                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} <br>Konsumsi Daging: %{y}",
+                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} % <br>Konsumsi Daging: %{y} Kg/kapita per tahun",
                 marker_size=8,
             )
             st.write(fig)
@@ -158,7 +159,7 @@ elif tabs == "Dashboard":
     st.markdown("""---""")
     col1, col2, col3 = st.columns(3)
     col1.metric("Konsumsi per Hari", "70g")
-    col1.metric("Konumsi per Tahun", "2.55kg")
+    col1.metric("Konsumsi per Tahun", "2.55kg")
     col2.write("Rock, C.L., Thomson, C.A., Sullivan, K.R., Howe, C.L., Kushi, L.H., Caan, B.J., Neuhouser, M.L., Bandera, E.V., Wang, Y., Robien, K. and Basen‐Engquist, K.M., 2022. American Cancer Society nutrition and physical activity guideline for cancer survivors. CA: A Cancer Journal for Clinicians, 72(3), pp.230-262.")
     col3.write("Aulawi, T., 2013. Hubungan konsumsi daging merah dan gaya hidup terhadap risiko kanker kolon. Kutubkhanah, 16(1), pp.37-45.")
     st.markdown("""---""")
@@ -175,11 +176,11 @@ elif tabs == "Dashboard":
                 height=600,
             )
             fig.update_layout(
-                xaxis_title="Mortalitas",
-                yaxis_title="Fasilitas Kesehatan",
+                xaxis_title="Mortalitas (%)",
+                yaxis_title="Fasilitas Kesehatan (per 1000 individu)",
             )
             fig.update_traces(
-                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} <br>Fasilitas Kesehatan: %{y}",
+                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} % <br>Fasilitas Kesehatan: %{y} per 1000 individu",
                 marker_size=8,
             )
             st.write(fig)
