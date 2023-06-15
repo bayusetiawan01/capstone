@@ -14,7 +14,7 @@ st.markdown("""---""")
 
 def highlight_rows(x):
     if x['Negara'] == 'Indonesia':
-        return ["color: lightblue"]*2
+        return ['background-color : #4DD0E1']*2
     else:
         return [None, None]
 
@@ -30,6 +30,10 @@ final_data2.rename(columns = {'meat_total':'Konsumsi Daging Merah', 'country_nam
 final_data2 = final_data2[["Negara","Konsumsi Daging Merah"]]
 final_data2.index = np.arange(1, len(final_data2) + 1)
 final_data2 = final_data2.iloc[np.r_[0:4, -8:0]]
+line = pd.DataFrame({"Negara": "", "Konsumsi Daging Merah": ""}, index=[5])
+final_data2 = pd.concat([final_data2, line], ignore_index=False)
+final_data2 = final_data2.sort_index()
+final_data2 = final_data2.rename(index={5: ''})
 final_data2 = final_data2.style.apply(highlight_rows, axis = 1)
 
 final_data3 = final_data.sort_values(
@@ -39,6 +43,10 @@ final_data3.rename(columns = {'hospital_bed':'Ketersediaan Fasilitas Kesehatan',
 final_data3 = final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]]
 final_data3.index = np.arange(1, len(final_data3) + 1)
 final_data3 = final_data3.iloc[np.r_[0:4, -8:0]]
+line = pd.DataFrame({"Negara": "", "Ketersediaan Fasilitas Kesehatan": ""}, index=[5])
+final_data3 = pd.concat([final_data3, line], ignore_index=False)
+final_data3 = final_data3.sort_index()
+final_data3 = final_data3.rename(index={5: ''})
 final_data3 = final_data3.style.apply(highlight_rows, axis = 1)
 
 final_data4 = final_data.sort_values(
@@ -48,6 +56,10 @@ final_data4.rename(columns = {'mortality':'Tingkat Mortalitas', 'country_name':'
 final_data4 = final_data4[["Negara","Tingkat Mortalitas"]]
 final_data4.index = np.arange(1, len(final_data4) + 1)
 final_data4 = final_data4.iloc[np.r_[0:4, -8:0]]
+line = pd.DataFrame({"Negara": "", "Tingkat Mortalitas": ""}, index=[5])
+final_data4 = pd.concat([final_data4, line], ignore_index=False)
+final_data4 = final_data4.sort_index()
+final_data4 = final_data4.rename(index={5: ''})
 final_data4 = final_data4.style.apply(highlight_rows, axis = 1)
 
 # Data Process End
