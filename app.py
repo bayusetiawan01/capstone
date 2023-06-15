@@ -112,11 +112,12 @@ elif tabs == "Dashboard":
     with st.container():
         with col1:
             st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun banyak media maupun tulisan di media sosial memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
+            st.write(" Berdasarkan informasi yang telah diperoleh, untuk sementara kita ambil hipotesis bahwa semakin banyak daging merah yang dikonsumsi maka semakin tinggi risiko kanker yang akan dialami oleh setiap individu.")        
         with col2:
             st.image('https://www.freeiconspng.com/uploads/meat-png-0.png')
     st.markdown("""---""")
 
-    st.header("Posisi Indonesia")
+    st.header("Bagaimana Posisi Indonesia pada Data yang Tersedia?")
     col1, col2, col3 = st.columns([1, 1, 1])
     with st.container():
         with col1:
@@ -148,13 +149,19 @@ elif tabs == "Dashboard":
             )
             st.write(fig)
         with col2:
-            "1. Berdasarkan data, konsumsi daging merah yang lebih tinggi justru mengurangi risiko terkena penyakit kanker maupun cvd."
-            "2. Hanya terdapat 4 negara dengan konsumsi daging merah diatas batas wajar yaitu Argentina, Australia, Brazil dan Khazakstan."
-            "3. Indonesia sendiri malah berada di posisi nomor 2 terbawah dalam konsumsi daging merah dan nomor 4 negara dengan mortality rate tinggi."
+            "1. Berdasarkan pola data, konsumsi daging merah yang lebih tinggi justru mengurangi risiko terkena penyakit kanker maupun cvd."
+            "2. Terdapat 4 Negara dengan konsumsi daging merah yang tinggi jika dibandingkan dengan negara lain yaitu Argentina, Australia, Khazakstan dan Brazil."
+            "3. Dari keempat negara dengan jumlah konsumsi daging merah terbanyak. terdapat 3 negara yang tidak mengikuti pola dikarenakan konsumsi daging merah yang terlalu banyak"
+            "3. Indonesia sendiri malah berada di posisi nomor 2 terbawah dalam konsumsi daging merah dan nomor 4 negara dengan mortality rate tinggi dari data yang dianalisis."
+    st.markdown("""---""")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Konsumsi per Hari", "70g")
+    col1.metric("Konumsi per Tahun", "2.55kg")
+    col2.write("Rock, C.L., Thomson, C.A., Sullivan, K.R., Howe, C.L., Kushi, L.H., Caan, B.J., Neuhouser, M.L., Bandera, E.V., Wang, Y., Robien, K. and Basen‐Engquist, K.M., 2022. American Cancer Society nutrition and physical activity guideline for cancer survivors. CA: A Cancer Journal for Clinicians, 72(3), pp.230-262.")
+    col3.write("Aulawi, T., 2013. Hubungan konsumsi daging merah dan gaya hidup terhadap risiko kanker kolon. Kutubkhanah, 16(1), pp.37-45.")
     st.markdown("""---""")
 
     col1, col2 = st.columns([1, 3])
-    data = np.random.randn(10, 1)
     with st.container():
         with col2:
             fig = px.scatter(
@@ -173,16 +180,16 @@ elif tabs == "Dashboard":
             )
             st.write(fig)
         with col1:
-            "1. Australia, Argentina dan Brazil dapat mengatasi kenaikan risiko akibat konsumsi daging merah yang banyak dikarenakan jumlah fasilitas Kesehatan yang cukup banyak. Sehingga mortality ratenya masih di atas median."
-            "2. Untuk Khazakstan meskipun jumlah fasilitas Kesehatan banyak namun tingkat mortalitasnya cukup tinggi hal ini dimungkinkan terdapat faktor yang belum teridentifikasi."
+            "1. Australia, Argentina dan Brazil dapat mengatasi kenaikan risiko akibat konsumsi daging merah yang banyak dikarenakan jumlah fasilitas Kesehatan yang memadai. Sehingga mortality ratenya masih di atas median dan mengikuti pola jumlah fasilitas kesehatan dan tingkat mortalitas."
+            "2. Untuk Khazakstan meskipun jumlah fasilitas Kesehatan banyak namun tingkat mortalitasnya cukup tinggi sehingga tidak sesuai dengan pola. hal ini dimungkinkan terjadi karena konsumsi daging merah yang terlalu banyak maupun terdapat faktor yang belum teridentifikasi seperti rusia yang tingkat mortalitasnya tinggi meskipun terdapat fasilitas kesehatan yang memadai."
             "3. Indonesia sendiri jumlah fasilitas kesehatannya sedikit jika dibandingan jumlah penduduk Indonesia yang banyak."
     st.markdown("""---""")
 
     st.header("Kesimpulan dan Solusi")
     "1. Berdasarkan data konsumsi daging merah yang semakin tinggi justru mengurangi resiko kanker selama konsumsinya tidak melebihi batas wajar. Ini dikarenakan daging merah kaya protein dan vitamin yang baik untuk menjaga kesehatan tubuh."
-    "2. Memang benar menurut penelitian daging merah dapat meningkatkan risiko kanker, namun hal itu terjadi jika terlalu banyak dikonsumsi. Menurut pedoman dari Kushi et al., jumlah daging merah yang direkomendasikan untuk orang sehat adalah 500 g/minggu atau 70 g/hari."
+    "2. Memang benar menurut penelitian daging merah dapat meningkatkan risiko kanker, namun hal itu terjadi jika terlalu banyak dikonsumsi. Menurut pedoman dari Rock et al., jumlah daging merah yang direkomendasikan untuk orang sehat adalah 500 g/minggu atau 70 g/hari."
     "3. Posisi Indonesia sendiri berada di posisi dua dengan konsumsi daging merah paling sedikit yaitu hanya 1.04 Kg per kapita per tahun dan berada di posisi nomor 4 tingkat mortalitas tertinggi dari data."
-    "4. Pemberitaan mengenai peningkatan resiko kanker dan cvd akibat konsumsi daging merah kurang tepat. Seharusnya malah sebaliknya yaitu anjuran untuk mengkonsumsi daging merah yang kaya protein untuk memenuhi kebutuhan gizi yang baik namun tetap memberikan anjuran agar tidak melebihi batas konsumsi."
+    "4. Pemberitaan mengenai peningkatan resiko kanker dan cvd akibat konsumsi daging merah di Indonesia kurang tepat untuk diimplementasikan. Seharusnya malah sebaliknya yaitu anjuran untuk mengkonsumsi daging merah yang kaya protein untuk memenuhi kebutuhan gizi yang baik namun tetap memberikan anjuran agar tidak melebihi batas konsumsi."
     "5. Pemerintah juga perlu meningkatkan kapasitas fasilitas Kesehatan untuk mengimbangi konsumsi daging untuk menghindari hal hal yang tidak diinginkan mengingat Indonesia berada di nomor 8 terbawah mengenai ketersediaan fasilitas Kesehatan."
 
 elif tabs == "Processed Data":
