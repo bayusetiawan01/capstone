@@ -137,6 +137,8 @@ elif tabs == "Dashboard":
                 y=final_data["meat_total"],
                 trendline="ols",
                 text=final_data["country_name"],
+                width=900,
+                height=600,
             )
             fig.update_layout(
                 xaxis_title="Mortalitas",
@@ -169,6 +171,8 @@ elif tabs == "Dashboard":
                 y=final_data["hospital_bed"],
                 trendline="ols",
                 text=final_data["country_name"],
+                width=900,
+                height=600,
             )
             fig.update_layout(
                 xaxis_title="Mortalitas",
