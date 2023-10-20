@@ -12,11 +12,13 @@ st.markdown("<style>" + open("./style.css").read() + "</style>", unsafe_allow_ht
 st.markdown("""---""")
 # Data Process
 
+
 def highlight_rows(x):
-    if x['Negara'] == 'Indonesia':
-        return ['background-color : #4DD0E1']*2
+    if x["Negara"] == "Indonesia":
+        return ["background-color : #4DD0E1"] * 2
     else:
         return [None, None]
+
 
 disease = pd.read_csv("Disease Percentage.csv")
 beef_consumption = pd.read_csv("Beef 2017.csv")
@@ -26,41 +28,52 @@ final_data = pd.read_csv("Final Data.csv")
 final_data2 = final_data.sort_values(
     by=["meat_total"], ignore_index=True, ascending=False
 )
-final_data2.rename(columns = {'meat_total':'Konsumsi Daging Merah', 'country_name':'Negara'}, inplace=True)
-final_data2 = final_data2[["Negara","Konsumsi Daging Merah"]]
+final_data2.rename(
+    columns={"meat_total": "Konsumsi Daging Merah", "country_name": "Negara"},
+    inplace=True,
+)
+final_data2 = final_data2[["Negara", "Konsumsi Daging Merah"]]
 final_data2.index = np.arange(1, len(final_data2) + 1)
 final_data2 = final_data2.iloc[np.r_[0:4, -8:0]]
 line = pd.DataFrame({"Negara": "", "Konsumsi Daging Merah": ""}, index=[5])
 final_data2 = pd.concat([final_data2, line], ignore_index=False)
 final_data2 = final_data2.sort_index()
-final_data2 = final_data2.rename(index={5: ''})
-final_data2 = final_data2.style.apply(highlight_rows, axis = 1)
+final_data2 = final_data2.rename(index={5: ""})
+final_data2 = final_data2.style.apply(highlight_rows, axis=1)
 
 final_data3 = final_data.sort_values(
     by=["hospital_bed"], ignore_index=True, ascending=False
 )
-final_data3.rename(columns = {'hospital_bed':'Ketersediaan Fasilitas Kesehatan', 'country_name':'Negara'}, inplace=True)
+final_data3.rename(
+    columns={
+        "hospital_bed": "Ketersediaan Fasilitas Kesehatan",
+        "country_name": "Negara",
+    },
+    inplace=True,
+)
 final_data3 = final_data3[["Negara", "Ketersediaan Fasilitas Kesehatan"]]
 final_data3.index = np.arange(1, len(final_data3) + 1)
 final_data3 = final_data3.iloc[np.r_[0:4, -8:0]]
 line = pd.DataFrame({"Negara": "", "Ketersediaan Fasilitas Kesehatan": ""}, index=[5])
 final_data3 = pd.concat([final_data3, line], ignore_index=False)
 final_data3 = final_data3.sort_index()
-final_data3 = final_data3.rename(index={5: ''})
-final_data3 = final_data3.style.apply(highlight_rows, axis = 1)
+final_data3 = final_data3.rename(index={5: ""})
+final_data3 = final_data3.style.apply(highlight_rows, axis=1)
 
 final_data4 = final_data.sort_values(
     by=["mortality"], ignore_index=True, ascending=False
 )
-final_data4.rename(columns = {'mortality':'Tingkat Mortalitas', 'country_name':'Negara'}, inplace=True)
-final_data4 = final_data4[["Negara","Tingkat Mortalitas"]]
+final_data4.rename(
+    columns={"mortality": "Tingkat Mortalitas", "country_name": "Negara"}, inplace=True
+)
+final_data4 = final_data4[["Negara", "Tingkat Mortalitas"]]
 final_data4.index = np.arange(1, len(final_data4) + 1)
 final_data4 = final_data4.iloc[np.r_[0:4, -8:0]]
 line = pd.DataFrame({"Negara": "", "Tingkat Mortalitas": ""}, index=[5])
 final_data4 = pd.concat([final_data4, line], ignore_index=False)
 final_data4 = final_data4.sort_index()
-final_data4 = final_data4.rename(index={5: ''})
-final_data4 = final_data4.style.apply(highlight_rows, axis = 1)
+final_data4 = final_data4.rename(index={5: ""})
+final_data4 = final_data4.style.apply(highlight_rows, axis=1)
 
 # Data Process End
 st.title("Analisis Pengaruh Konsumsi Daging Merah Terhadap Peningkatan Risiko Penyakit")
@@ -71,7 +84,7 @@ st.write("Oleh Bayu Setiawan")
 st.markdown("""---""")
 with st.sidebar:
     tabs = on_hover_tabs(
-        tabName=["Dashboard", "Raw Data", "Processed Data"],
+        tabName=["Data Analytics", "Raw Data", "Processed Data"],
         iconName=["dashboard", "receipt_long", "description"],
     )
 
@@ -106,16 +119,20 @@ if tabs == "Raw Data":
     st.caption("sumber : https://data.worldbank.org/indicator/SH.MED.BEDS.ZS")
     st.dataframe(hospital_bed)
 
-elif tabs == "Dashboard":
+elif tabs == "Data Analytics":
     st.header("Pendahuluan")
     col1, col2 = st.columns([4, 2])
     with st.container():
         with col1:
-            st.write("Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun banyak media maupun tulisan di media sosial memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan.")
+            st.write(
+                "Daging adalah sumber nutrisi yang penting yaitu protein, zat besi, seng, dan vitamin B12. Namun banyak media maupun tulisan di media sosial memberitakan mengenai daging merah yang dapat menaikkan risiko kanker, di berbagai jurnal, kemenkes maupun WHO (Organisasi Kesehatan Dunia). WHO mengatakan bahwa daging merah sebagai penyebab kanker (Grup 2a karsinogen) dan daging olahan sebagai penyebab 'pasti' kanker (kelompok 1 karsinogen). Istilah 'daging merah' termasuk daging sapi, daging sapi muda, babi, domba, dan kambing. Daging olahan mengacu pada daging yang telah melalui pengasinan, pengawetan, fermentasi, pengasapan, atau proses lain yang bertujuan untuk meningkatkan rasa atau meningkatkan daya tahan."
+            )
             st.subheader("Hipotesis")
-            st.write(" Berdasarkan informasi yang telah diperoleh, untuk sementara kita ambil hipotesis bahwa semakin banyak daging merah yang dikonsumsi maka semakin tinggi risiko kanker yang akan dialami oleh setiap individu.")        
+            st.write(
+                " Berdasarkan informasi yang telah diperoleh, untuk sementara kita ambil hipotesis bahwa semakin banyak daging merah yang dikonsumsi maka semakin tinggi risiko kanker yang akan dialami oleh setiap individu."
+            )
         with col2:
-            st.image('https://www.freeiconspng.com/uploads/meat-png-0.png')
+            st.image("https://www.freeiconspng.com/uploads/meat-png-0.png")
     st.markdown("""---""")
 
     st.header("Data yang digunakan")
@@ -128,7 +145,7 @@ elif tabs == "Dashboard":
         with col3:
             st.table(final_data4)
     st.markdown("""---""")
-    
+
     st.header("Analisis Data")
     col1, col2 = st.columns([3, 1])
     with st.container():
@@ -137,18 +154,21 @@ elif tabs == "Dashboard":
                 x=final_data["mortality"],
                 y=final_data["meat_total"],
                 trendline="ols",
-                text=final_data["country_name"],
+                color=final_data["country_name"],
                 width=900,
                 height=600,
             )
             fig.update_layout(
                 xaxis_title="Mortalitas (%)",
                 yaxis_title="Konsumsi Daging (Kg/kapita per tahun)",
-                uniformtext_mode='hide',
+                uniformtext_mode="hide",
+                showlegend=False,
             )
             fig.update_traces(
-                hovertemplate="Negara: %{text} <br>Mortalitas: %{x} % <br>Konsumsi Daging: %{y} Kg/kapita per tahun",
-                marker_size=8,
+                hovertemplate="Negara: %{color } <br>Mortalitas: %{x} % <br>Konsumsi Daging: %{y} Kg/kapita per tahun",
+                marker_size=10,
+                marker_color="grey",
+                textposition=None,
             )
             st.write(fig)
         with col2:
@@ -160,8 +180,12 @@ elif tabs == "Dashboard":
     col1, col2, col3 = st.columns(3)
     col1.metric("Konsumsi per Hari", "70g")
     col1.metric("Konsumsi per Tahun", "2.55kg")
-    col2.write("Rock, C.L., Thomson, C.A., Sullivan, K.R., Howe, C.L., Kushi, L.H., Caan, B.J., Neuhouser, M.L., Bandera, E.V., Wang, Y., Robien, K. and Basen‐Engquist, K.M., 2022. American Cancer Society nutrition and physical activity guideline for cancer survivors. CA: A Cancer Journal for Clinicians, 72(3), pp.230-262.")
-    col3.write("Aulawi, T., 2013. Hubungan konsumsi daging merah dan gaya hidup terhadap risiko kanker kolon. Kutubkhanah, 16(1), pp.37-45.")
+    col2.write(
+        "Rock, C.L., Thomson, C.A., Sullivan, K.R., Howe, C.L., Kushi, L.H., Caan, B.J., Neuhouser, M.L., Bandera, E.V., Wang, Y., Robien, K. and Basen‐Engquist, K.M., 2022. American Cancer Society nutrition and physical activity guideline for cancer survivors. CA: A Cancer Journal for Clinicians, 72(3), pp.230-262."
+    )
+    col3.write(
+        "Aulawi, T., 2013. Hubungan konsumsi daging merah dan gaya hidup terhadap risiko kanker kolon. Kutubkhanah, 16(1), pp.37-45."
+    )
     st.markdown("""---""")
 
     col1, col2 = st.columns([1, 3])
