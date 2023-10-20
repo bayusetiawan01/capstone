@@ -157,7 +157,7 @@ elif tabs == "Data Analytics":
                 locations="location",
                 locationmode="ISO-3",
                 color="meat_total",
-                hover_name="location",
+                hover_name="country_name",
                 color_continuous_scale=px.colors.sequential.Blues,
                 width=700,
             )
@@ -176,7 +176,7 @@ elif tabs == "Data Analytics":
                 locations="Country Code",
                 locationmode="ISO-3",
                 color="2017",
-                hover_name="Country Code",
+                hover_name="Country Name",
                 color_continuous_scale=px.colors.sequential.Blues,
                 width=700,
             )
