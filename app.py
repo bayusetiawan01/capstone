@@ -198,7 +198,8 @@ elif tabs == "Data Analytics":
                 final_data,
                 x="mortality",
                 y="meat_total",
-                trendline="ols",
+                trendline="lowess",
+                trendline_options=dict(frac=1),
                 custom_data=["country_name", "mortality", "meat_total"],
                 width=900,
                 height=600,
@@ -216,8 +217,8 @@ elif tabs == "Data Analytics":
 
         with col2:
             "Berdasarkan pola data, konsumsi daging merah yang lebih tinggi justru mengurangi risiko terkena penyakit kanker maupun cvd."
-            ":red[1]. Dari keempat negara dengan jumlah konsumsi daging merah terbanyak. terdapat 3 negara yang tidak mengikuti pola dikarenakan konsumsi daging merah yang terlalu banyak"
-            ":blue[2]. Indonesia sendiri malah berada di posisi nomor 2 terbawah dalam konsumsi daging merah dan nomor 4 negara dengan mortality rate tinggi dari data yang dianalisis."
+            ":red[1]. Dari kelima negara dengan jumlah konsumsi daging merah terbanyak. terdapat 4 negara yang tidak mengikuti pola dikarenakan konsumsi daging merah yang terlalu banyak"
+            ":blue[2]. Indonesia sendiri malah berada di posisi nomor 3 terbawah dalam konsumsi daging merah dan nomor 4 negara dengan mortality rate tinggi dari data yang dianalisis."
             ":green[3]. Australia sebagai salah satu negara dengan konsumsi daging terbanyak tetap menjaga tingkat kesehatan penduduknya dengan teknologi pengolahan daging dan teknologi kesehatan"
     st.markdown("""---""")
     col1, col2, col3 = st.columns(3)
@@ -232,7 +233,8 @@ elif tabs == "Data Analytics":
                 data_frame=final_data,
                 x="mortality",
                 y="hospital_bed",
-                trendline="ols",
+                trendline="lowess",
+                trendline_options=dict(frac=1),
                 custom_data=["country_name", "mortality", "hospital_bed"],
                 width=900,
                 height=600,
@@ -250,7 +252,7 @@ elif tabs == "Data Analytics":
         with col1:
             "Terdapat beberapa negara yang tidak mengikuti pola dimana jika jumlah fasilitas kesehatan memadai maka risiko kematian akibat kanker juga berkurang."
             ":red[1]. Argentina dan Khazakstan memiliki jumlah fasilitas kesehatan yang memadai namun tingkat mortalitasnya relatif tinggi, berhubungan dengan data sebelumnya hal ini bisa diakibatkan konsumsi daging kedua negara tersebut terlalu tinggi."
-            ":red[2]. Untuk rusia meskipun konsumsi daging tidak terlalu tinggi namun bisa diakibatkan oleh gaya hidup tidak sehat yang lain seperti konsumsi alkohol"
+            ":red[2]. Untuk rusia dan ukraina meskipun konsumsi daging tidak terlalu tinggi namun bisa diakibatkan oleh gaya hidup tidak sehat yang lain seperti konsumsi alkohol"
             ":blue[3]. Indonesia sendiri jumlah fasilitas kesehatannya sedikit jika dibandingan jumlah penduduk Indonesia yang banyak."
             "Jadi faktor konsumsi daging merah terhadap risiko kanker dapat terlihat juga pada dataset lain yang menyebabkan adanya pencilan pada data."
     st.markdown("""---""")
@@ -258,7 +260,7 @@ elif tabs == "Data Analytics":
     st.header("Kesimpulan dan Solusi")
     "1. Berdasarkan data konsumsi daging merah yang semakin tinggi justru mengurangi risiko kanker selama konsumsinya tidak melebihi batas wajar."
     "2. Batas Konsumsi daging merah yang direkomendasikan untuk orang sehat adalah 2.55kg/tahun atau 70 g/hari sesuai dengan pedoman Nutrisi dari Rock dkk."
-    "3. Posisi Indonesia sendiri berada di posisi dua dengan konsumsi daging merah paling sedikit yaitu hanya 1.04 Kg per kapita per tahun dan berada di posisi nomor 4 tingkat mortalitas tertinggi dari data."
+    "3. Posisi Indonesia sendiri berada di posisi tiga dengan konsumsi daging merah paling sedikit yaitu hanya 1.04 Kg per kapita per tahun dan berada di posisi nomor 4 tingkat mortalitas tertinggi dari data."
     "4. Untuk indonesia seharusnya lebih dianjurkan untuk mengkonsumsi daging merah lebih banyak untuk kebutuhan gizi"
 
 elif tabs == "Processed Data":
