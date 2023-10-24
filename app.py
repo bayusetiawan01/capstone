@@ -223,7 +223,7 @@ elif tabs == "Data Analytics":
     st.markdown("""---""")
     col1, col2, col3 = st.columns(3)
     col1.metric("Konsumsi per Hari", "70g")
-    col2.metric("Konsumsi per Tahun", "2.55kg")
+    col2.metric("Konsumsi per Tahun", "25.5kg")
     st.markdown("""---""")
 
     col1, col2 = st.columns([1, 3])
@@ -259,7 +259,7 @@ elif tabs == "Data Analytics":
 
     st.header("Kesimpulan dan Solusi")
     "1. Berdasarkan data konsumsi daging merah yang semakin tinggi justru mengurangi risiko kanker selama konsumsinya tidak melebihi batas wajar."
-    "2. Batas Konsumsi daging merah yang direkomendasikan untuk orang sehat adalah 2.55kg/tahun atau 70 g/hari sesuai dengan pedoman Nutrisi dari Rock dkk."
+    "2. Batas Konsumsi daging merah yang direkomendasikan untuk orang sehat adalah 25.5kg/tahun atau 70 g/hari sesuai dengan pedoman Nutrisi dari Rock dkk."
     "3. Posisi Indonesia sendiri berada di posisi tiga dengan konsumsi daging merah paling sedikit yaitu hanya 1.04 Kg per kapita per tahun dan berada di posisi nomor 4 tingkat mortalitas tertinggi dari data."
     "4. Untuk indonesia seharusnya lebih dianjurkan untuk mengkonsumsi daging merah lebih banyak untuk kebutuhan gizi"
 
